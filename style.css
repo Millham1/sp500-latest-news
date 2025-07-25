@@ -10,17 +10,26 @@ body {
 
 h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 
-/* Hero section */
+/* Header layout */
 .hero {
-  padding: 2rem 2rem;
+  position: relative;
+  padding: 2rem;
+  text-align: center;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
-  position: relative;
-  text-align: center; /* center the title */
 }
 .hero-title {
-  font-size: 3rem;
-  margin: 0 0 1rem 0;
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+}
+
+/* Header image */
+.header-image {
+  display: block;
+  margin: 1rem auto 0 auto;
+  max-width: 80%;
+  opacity: 0.5;
+  border-radius: 8px;
 }
 
 /* Ticker bar */
@@ -28,29 +37,27 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
   position: absolute;
   top: 0.5rem;
   right: 1rem;
-  width: 280px;
+  width: 290px;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
   font-size: 0.85rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  z-index: 10;
+  z-index: 100;
 }
-#ticker-bar h4 { margin: 0 0 0.5rem 0; font-size: 1rem; color: #030a18; }
+#ticker-bar h4 { margin: 0 0 0.4rem 0; font-size: 1rem; color: #030a18; }
 #ticker-list {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  max-height: none;
-  overflow-y: visible;
+  gap: 0.4rem;
 }
 .ticker-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  padding: 0.2rem 0.1rem;
+  padding: 0.25rem 0.1rem;
   border-radius: 4px;
   transition: background-color 0.2s;
 }
@@ -58,19 +65,22 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 .ticker-item span.symbol { font-weight: bold; margin-right: 0.25rem; }
 .ticker-item span.price { color: #374151; margin-right: 0.25rem; }
 .ticker-item span.change { font-weight: bold; margin-right: 0.25rem; }
-.arrow-up { color: #00c853; font-weight: bold; }
-.arrow-down { color: #e53935; font-weight: bold; }
+.arrow-up { color: #00c853; font-size: 1.1rem; }
+.arrow-down { color: #e53935; font-size: 1.1rem; }
 
-/* Stock detail panel */
+/* Stock detail panel overlay */
 #stock-detail {
+  position: absolute;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
   background: #ffffff;
-  margin-top: 1.25rem;
-  padding: 1rem;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+  z-index: 99;
 }
 #stock-detail.hidden { display: none; }
 #stock-detail h2 { margin-top: 0; margin-bottom: 0.3rem; }
@@ -82,7 +92,7 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 }
 #close-detail {
   margin-top: 0.7rem;
-  padding: 0.5rem 0.8rem;
+  padding: 0.45rem 0.7rem;
   background: #97b1df;
   color: #ffffff;
   border: none;
@@ -92,19 +102,15 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 }
 #close-detail:hover { background: #7a97c6; }
 
-/* Government reports table */
-.gov-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
+/* Sections */
+main section {
+  background: #ffffff;
+  margin: 1rem 2rem;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
-.gov-table th, .gov-table td {
-  padding: 0.5rem;
-  border: 1px solid #e5e7eb;
-  text-align: left;
-  font-size: 0.9rem;
-}
-.gov-table th { background: #97b1df; color: #ffffff; }
+main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 
 /* News lists */
 #stock-news-list,
@@ -115,8 +121,8 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 }
 #stock-news-list li,
 #gov-news-list li {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
 }
 #stock-news-list a,
 #gov-news-list a {
@@ -128,28 +134,23 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
   text-decoration: underline;
 }
 
-/* Section layout */
-main section {
-  background: #ffffff;
-  margin: 1rem 2rem;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+/* Citation text under stories */
+.citation-text {
+  font-size: 0.8rem;
+  color: #6b7280;
 }
-main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 
-/* Snapshot text */
-.snapshot-text ul { list-style: disc; padding-left: 1.5rem; }
-
-/* Drivers */
+/* Drivers / cards */
 .card-container { display: flex; flex-wrap: wrap; gap: 1rem; }
 .card {
-  flex: 1 1 30%; min-width: 260px;
+  flex: 1 1 30%;
+  min-width: 260px;
   background: #f8fafc;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  display: flex; flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .card img {
   width: 100%;
@@ -164,7 +165,10 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 /* Movers */
 .movers-container { display: flex; flex-wrap: wrap; gap: 2rem; }
 .advancers, .decliners {
-  flex: 1 1 45%; min-width: 260px; padding: 1rem; border-radius: 8px;
+  flex: 1 1 45%;
+  min-width: 260px;
+  padding: 1rem;
+  border-radius: 8px;
 }
 .advancers {
   background: #eaf5e9;
@@ -176,6 +180,7 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 }
 .movers-container h3 { margin-top: 0; }
 .movers-container ul { list-style: disc; padding-left: 1.5rem; }
+
 
 
 
