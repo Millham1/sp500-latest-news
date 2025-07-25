@@ -104,7 +104,7 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 }
 .gov-table th { background: #97b1df; color: #ffffff; }
 
-/* Stock and gov headline lists */
+/* Stock and government headline lists */
 #stock-news-list,
 #gov-news-list {
   list-style: none;
@@ -126,6 +126,12 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
   text-decoration: underline;
 }
 
+/* citation styling: small text under headlines */
+.citation-text {
+  font-size: 0.75rem;
+  color: #6b7280; /* greyish for subtlety */
+}
+
 /* Section containers */
 main section {
   background: #ffffff;
@@ -136,14 +142,14 @@ main section {
 }
 main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 
-/* Snapshot */
+/* Snapshot section layout */
 .snapshot-container { display: flex; flex-wrap: wrap; gap: 1rem; }
 .chart-wrapper { flex: 1 1 45%; min-width: 260px; height: 300px; }
 .chart-caption { font-size: 0.8rem; color: #555; margin-top: 0.3rem; font-style: italic; }
 .snapshot-text { flex: 1 1 45%; min-width: 260px; }
 .snapshot-text ul { list-style: disc; padding-left: 1.5rem; }
 
-/* Drivers */
+/* Driver cards */
 .card-container { display: flex; flex-wrap: wrap; gap: 1rem; }
 .card {
   flex: 1 1 30%; min-width: 260px;
@@ -163,7 +169,7 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 .card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
 .card p { font-size: 0.95rem; flex: 1; }
 
-/* Movers */
+/* Movers section */
 .movers-container { display: flex; flex-wrap: wrap; gap: 2rem; }
 .advancers, .decliners {
   flex: 1 1 45%; min-width: 260px; padding: 1rem; border-radius: 8px;
@@ -179,7 +185,5 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 .movers-container h3 { margin-top: 0; }
 .movers-container ul { list-style: disc; padding-left: 1.5rem; }
 
-/* Earnings section removed */
-.earnings-container { display: none; }
 
 
