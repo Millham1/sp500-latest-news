@@ -10,7 +10,7 @@ body {
 
 h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 
-/* Header layout */
+/* Header */
 .hero {
   position: relative;
   padding: 2rem;
@@ -65,10 +65,10 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 .ticker-item span.symbol { font-weight: bold; margin-right: 0.25rem; }
 .ticker-item span.price { color: #374151; margin-right: 0.25rem; }
 .ticker-item span.change { font-weight: bold; margin-right: 0.25rem; }
-.arrow-up { color: #00c853; font-size: 1.1rem; }
-.arrow-down { color: #e53935; font-size: 1.1rem; }
+.arrow-up { color: #00c853; font-size: 1.2rem; }
+.arrow-down { color: #e53935; font-size: 1.2rem; }
 
-/* Stock detail panel overlay */
+/* Stock detail overlay */
 #stock-detail {
   position: absolute;
   top: 4rem;
@@ -102,7 +102,7 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 }
 #close-detail:hover { background: #7a97c6; }
 
-/* Sections */
+/* Section styles */
 main section {
   background: #ffffff;
   margin: 1rem 2rem;
@@ -134,13 +134,13 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
   text-decoration: underline;
 }
 
-/* Citation text under stories */
+/* Citation text */
 .citation-text {
   font-size: 0.8rem;
   color: #6b7280;
 }
 
-/* Drivers / cards */
+/* Drivers cards */
 .card-container { display: flex; flex-wrap: wrap; gap: 1rem; }
 .card {
   flex: 1 1 30%;
@@ -180,6 +180,7 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 }
 .movers-container h3 { margin-top: 0; }
 .movers-container ul { list-style: disc; padding-left: 1.5rem; }
+
 
 
 
