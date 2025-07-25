@@ -3,27 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>S&P 500 Latest News</title>
+  <title>S&P latest news</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <header class="hero">
-    <div class="hero-content">
-      <h1>S&amp;P 500 Record Highs &amp; Earnings Impact</h1>
-      <p class="subtitle">A market recap with key insights from July 24, 2025</p>
-    </div>
-    <div class="hero-image">
-      <!-- Replace this with your own image or remove the tag -->
-      <img src="title_image.png" alt="Abstract stock market and AI graphic" />
-    </div>
+    <h1 class="hero-title">S&amp;P latest news</h1>
+    <!-- Live ticker bar for top movers -->
     <div id="ticker-bar">
       <h4>Top Movers</h4>
       <div id="ticker-list"></div>
     </div>
-  </header>
-
-  <main>
+    <!-- Stock detail panel moved into the header -->
     <section id="stock-detail" class="hidden">
       <h2 id="detail-symbol"></h2>
       <p id="detail-name"></p>
@@ -37,35 +28,61 @@
       </table>
       <button id="close-detail">Close</button>
     </section>
+  </header>
+
+  <main>
+    <!-- Stock headlines moved to top -->
+    <section id="stock-news">
+      <h2>S&amp;P 500 Stock Headlines</h2>
+      <ul id="stock-news-list">
+        <!-- Fallback headlines; script will append fresh ones -->
+        <li><a href="https://example.com/alphabet-earnings-sp500" target="_blank">Alphabet earnings propel S&amp;P 500 tech giants to record highs</a></li>
+        <li><a href="https://example.com/tesla-slump-sp500" target="_blank">Tesla slump drags S&amp;P 500 industrials after earnings miss</a></li>
+        <li><a href="https://example.com/trade-deals-sp500" target="_blank">Trade deals boost sentiment for S&amp;P 500 companies ahead of tariff deadline</a></li>
+      </ul>
+    </section>
+
+    <!-- Upcoming government reports moved just below stock headlines -->
+    <section id="gov-reports">
+      <h2>Upcoming Government Reports</h2>
+      <table class="gov-table">
+        <thead>
+          <tr><th>Date &amp; Time (ET)</th><th>Report</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Jul 26 2025 08:30</td><td>GDP (Q2) Advance</td><td>First estimate of GDP growth for Q2</td></tr>
+          <tr><td>Jul 31 2025 08:30</td><td>Nonfarm Payrolls</td><td>Monthly jobs report showing employment gains and unemployment rate</td></tr>
+          <tr><td>Aug 01 2025 10:00</td><td>ISM Manufacturing PMI</td><td>Index of U.S. manufacturing activity</td></tr>
+          <tr><td>Aug 02 2025 14:00</td><td>FOMC Rate Decision</td><td>Federal Reserve announcement on interest rates</td></tr>
+        </tbody>
+      </table>
+    </section>
 
     <!-- Market Snapshot & Highlights -->
     <section id="snapshot">
       <h2>Market Snapshot &amp; Highlights</h2>
-      <div class="snapshot-container">
-        <div class="chart-wrapper">
-          <canvas id="snapshotChart"></canvas>
-          <p class="chart-caption">Daily percentage change (July 24, 2025)</p>
-        </div>
-        <div class="snapshot-text">
-          <ul>
-            <li>
-              S&amp;P 500 &amp; Nasdaq closed at record highs; Dow declined
-              <br /><small class="citation-text">Source: Investopedia — July 24 2025, 5:28 PM EDT</small>
-            </li>
-            <li>
-              80% of reporting companies beat earnings expectations
-              <br /><small class="citation-text">Source: Reuters — July 24 2025</small>
-            </li>
-            <li>
-              Trade optimism from deals with Japan, Indonesia &amp; Philippines; progress with EU ahead of Aug 1 tariff deadline
-              <br /><small class="citation-text">Source: Reuters — July 24 2025</small>
-            </li>
-            <li>
-              Risk appetite improved as yields climbed while global equities &amp; crude rallied and gold eased
-              <br /><small class="citation-text">Source: Reuters — July 24 2025</small>
-            </li>
-          </ul>
-        </div>
+      <div class="snapshot-text">
+        <ul>
+          <li>
+            <a href=":contentReference[oaicite:0]{index=0}" target="_blank">S&amp;P 500 &amp; Nasdaq closed at record highs; Dow declined</a>
+          </li>
+          <li>
+            <a href=":contentReference[oaicite:1]{index=1}" target="_blank">80% of reporting companies beat earnings expectations</a>
+          </li>
+          <li>
+            <a href=":contentReference[oaicite:2]{index=2}" target="_blank">Trade optimism from deals with Japan, Indonesia &amp; Philippines; progress with EU ahead of Aug 1 tariff deadline</a>
+          </li>
+          <li>
+            <a href=":contentReference[oaicite:3]{index=3}" target="_blank">Risk appetite improved as yields climbed while global equities &amp; crude rallied and gold eased</a>
+          </li>
+        </ul>
+      </div>
+      <div class="citations">
+        <!-- Footnote references -->
+        <a href=":contentReference[oaicite:4]{index=4}">[1]</a>
+        <a href=":contentReference[oaicite:5]{index=5}">[2]</a>
+        <a href=":contentReference[oaicite:6]{index=6}">[3]</a>
+        <a href=":contentReference[oaicite:7]{index=7}">[4]</a>
       </div>
     </section>
 
@@ -76,31 +93,19 @@
         <div class="card">
           <img src="ai_image.png" alt="S&amp;P 500 tech rally" />
           <h3>Alphabet &amp; AI Rally</h3>
-          <p>
-            Alphabet’s earnings beat and its $85 B AI investment lifted fellow
-            S&amp;P 500 tech giants like Nvidia and Microsoft, powering the
-            index to record highs.
-          </p>
+          <p>Alphabet’s earnings beat and its $85 B AI investment lifted fellow S&amp;P 500 tech giants like Nvidia and Microsoft, powering the index to record highs.</p>
         </div>
         <div class="card">
           <img src="ev_image.png" alt="S&amp;P 500 industrial slump" />
           <h3>Tesla &amp; Industrial Slump</h3>
-          <p>
-            Tesla—one of the largest S&amp;P 500 constituents—slid after an
-            earnings miss and a “rough quarters” warning, while other S&amp;P 500
-            industrials like IBM and Honeywell also dropped.
-          </p>
+          <p>Tesla—one of the largest S&amp;P 500 constituents—slid after an earnings miss and a “rough quarters” warning, while other S&amp;P 500 industrials like IBM and Honeywell also dropped.</p>
         </div>
         <div class="card">
           <img src="trade_image.png" alt="Trade deals &amp; macro" />
           <h3>Trade Deals &amp; Macro</h3>
-          <p>
-            New trade agreements and progress with the EU bolstered market
-            sentiment for S&amp;P 500 companies as yields climbed and gold eased.
-          </p>
+          <p>New trade agreements and progress with the EU bolstered market sentiment for S&amp;P 500 companies as yields climbed and gold eased.</p>
         </div>
       </div>
-      <!-- No separate citations: sources are spelled out under each highlight -->
     </section>
 
     <!-- Biggest Movers -->
@@ -126,32 +131,6 @@
       </div>
     </section>
 
-    <!-- Government Reports Schedule -->
-    <section id="gov-reports">
-      <h2>Upcoming Government Reports</h2>
-      <table class="gov-table">
-        <thead>
-          <tr><th>Date &amp; Time (ET)</th><th>Report</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Jul 26 2025 08:30</td><td>GDP (Q2) Advance</td><td>First estimate of GDP growth for Q2</td></tr>
-          <tr><td>Jul 31 2025 08:30</td><td>Nonfarm Payrolls</td><td>Monthly jobs report showing employment gains and unemployment rate</td></tr>
-          <tr><td>Aug 01 2025 10:00</td><td>ISM Manufacturing PMI</td><td>Index of U.S. manufacturing activity</td></tr>
-          <tr><td>Aug 02 2025 14:00</td><td>FOMC Rate Decision</td><td>Federal Reserve announcement on interest rates</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- S&P 500 Stock Headlines -->
-    <section id="stock-news">
-      <h2>S&amp;P 500 Stock Headlines</h2>
-      <ul id="stock-news-list">
-        <li><a href="https://example.com/alphabet-earnings-sp500" target="_blank">Alphabet earnings propel S&amp;P 500 tech giants to record highs</a></li>
-        <li><a href="https://example.com/tesla-slump-sp500" target="_blank">Tesla slump drags S&amp;P 500 industrials after earnings miss</a></li>
-        <li><a href="https://example.com/trade-deals-sp500" target="_blank">Trade deals boost sentiment for S&amp;P 500 companies ahead of tariff deadline</a></li>
-      </ul>
-    </section>
-
     <!-- Government Report Headlines -->
     <section id="gov-news">
       <h2>Government Report Headlines</h2>
@@ -171,7 +150,6 @@
         <li>Trade negotiations and the Aug 1 tariff deadline will be pivotal for market direction</li>
         <li>Upcoming Fed meeting and macro data releases could spur volatility – stay vigilant</li>
       </ul>
-      <!-- No footnotes here; this section is static -->
     </section>
   </main>
 
@@ -181,6 +159,7 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
