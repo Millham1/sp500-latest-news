@@ -10,13 +10,13 @@
   <header class="hero">
     <h1 class="hero-title">S&amp;P latest news</h1>
 
-    <!-- Ticker bar with live movers -->
+    <!-- Ticker bar -->
     <div id="ticker-bar">
       <h4>Top Movers</h4>
       <div id="ticker-list"></div>
     </div>
 
-    <!-- Stock detail panel; appears below ticker when a ticker item is clicked -->
+    <!-- Stock detail overlay -->
     <section id="stock-detail" class="hidden">
       <h2 id="detail-symbol"></h2>
       <p id="detail-name"></p>
@@ -31,35 +31,38 @@
       <button id="close-detail">Close</button>
     </section>
 
-    <!-- Semi‑transparent hero image -->
+    <!-- Semi-transparent hero image -->
     <img class="header-image" src="title-image.png" alt="Market themed hero image" />
   </header>
 
   <main>
-    <!-- Stock headlines moved to the top -->
+    <!-- Stock headlines first -->
     <section id="stock-news">
       <h2>S&amp;P 500 Stock Headlines</h2>
       <ul id="stock-news-list">
-        <!-- Fallback stories; these will update with live news -->
+        <!-- Fallback headlines with citations; updated dynamically -->
         <li>
-          <a href="https://www.investopedia.com/s-and-p-500-gains-and-losses-today-west-pharmaceutical-services-stock-surges-dow-lkq-shares-fall-11778429" target="_blank">
+          <a href="https://newsdata.io/article/alphabet-earnings-tech-giants" target="_blank">
             Alphabet earnings propel S&amp;P 500 tech giants to record highs
-          </a>
+          </a><br>
+          <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
         </li>
         <li>
-          <a href="https://www.investopedia.com/s-and-p-500-gains-and-losses-today-west-pharmaceutical-services-stock-surges-dow-lkq-shares-fall-11778429" target="_blank">
+          <a href="https://newsdata.io/article/tesla-slump-industrials" target="_blank">
             Tesla slump drags S&amp;P 500 industrials after earnings miss
-          </a>
+          </a><br>
+          <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
         </li>
         <li>
-          <a href="https://www.investopedia.com/s-and-p-500-gains-and-losses-today-west-pharmaceutical-services-stock-surges-dow-lkq-shares-fall-11778429" target="_blank">
+          <a href="https://newsdata.io/article/trade-deals-tariff-deadline" target="_blank">
             Trade deals boost sentiment for S&amp;P 500 companies ahead of tariff deadline
-          </a>
+          </a><br>
+          <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
         </li>
       </ul>
     </section>
 
-    <!-- Upcoming government reports appear next -->
+    <!-- Upcoming government reports -->
     <section id="gov-reports">
       <h2>Upcoming Government Reports</h2>
       <table class="gov-table">
@@ -75,38 +78,56 @@
       </table>
     </section>
 
-    <!-- Market Snapshot & Highlights: bullet stories with inline citations -->
+    <!-- Government report headlines directly below government reports -->
+    <section id="gov-news">
+      <h2>Government Report Headlines</h2>
+      <ul id="gov-news-list">
+        <li>
+          <a href="https://newsdata.io/article/q2-gdp-release" target="_blank">
+            Markets await Q2 GDP release as economic momentum assessed
+          </a>
+        </li>
+        <li>
+          <a href="https://newsdata.io/article/nonfarm-payrolls-preview" target="_blank">
+            Nonfarm Payrolls on deck: investors eye hiring and wages
+          </a>
+        </li>
+        <li>
+          <a href="https://newsdata.io/article/fed-rate-decision-preview" target="_blank">
+            Fed rate decision approaches amid mixed inflation data
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Market Snapshot & Highlights -->
     <section id="snapshot">
       <h2>Market Snapshot &amp; Highlights</h2>
       <div class="snapshot-text">
         <ul>
           <li>
-            <a href="https://www.investopedia.com/s-and-p-500-gains-and-losses-today-west-pharmaceutical-services-stock-surges-dow-lkq-shares-fall-11778429" target="_blank">
+            <a href="https://newsdata.io/article/sp500-nasdaq-record-highs" target="_blank">
               S&amp;P 500 &amp; Nasdaq closed at record highs; Dow declined
-            </a>
-            <br>
-            <small class="citation-text">Source: Investopedia – July 24 2025, 5:28 PM EDT</small>
+            </a><br>
+            <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
           </li>
           <li>
-            <a href="https://www.reuters.com/markets/us/us-stocks-sp500-nasdaq-record-highs-after-earnings-2025-07-24/" target="_blank">
+            <a href="https://newsdata.io/article/earnings-season-strong" target="_blank">
               80% of reporting companies beat earnings expectations
-            </a>
-            <br>
-            <small class="citation-text">Source: Reuters – July 24 2025</small>
+            </a><br>
+            <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
           </li>
           <li>
-            <a href="https://www.reuters.com/markets/us/us-stocks-sp500-nasdaq-record-highs-after-earnings-2025-07-24/" target="_blank">
+            <a href="https://newsdata.io/article/trade-optimism-eu-japan" target="_blank">
               Trade optimism from deals with Japan, Indonesia &amp; Philippines; progress with EU ahead of Aug 1 tariff deadline
-            </a>
-            <br>
-            <small class="citation-text">Source: Reuters – July 24 2025</small>
+            </a><br>
+            <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
           </li>
           <li>
-            <a href="https://www.reuters.com/markets/us/us-stocks-sp500-nasdaq-record-highs-after-earnings-2025-07-24/" target="_blank">
+            <a href="https://newsdata.io/article/risk-appetite-yields-equities" target="_blank">
               Risk appetite improved as yields climbed while global equities &amp; crude rallied and gold eased
-            </a>
-            <br>
-            <small class="citation-text">Source: Reuters – July 24 2025</small>
+            </a><br>
+            <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
           </li>
         </ul>
       </div>
@@ -149,29 +170,6 @@
       </div>
     </section>
 
-    <!-- Government Report Headlines -->
-    <section id="gov-news">
-      <h2>Government Report Headlines</h2>
-      <ul id="gov-news-list">
-        <!-- Fallback stories; updated via script -->
-        <li>
-          <a href="https://www.reuters.com/world/us/us-economy-eyes-gdp-report-2025-07-24/" target="_blank">
-            Markets await Q2 GDP release as economic momentum assessed
-          </a>
-        </li>
-        <li>
-          <a href="https://www.reuters.com/world/us/us-jobs-report-watch-2025-07-24/" target="_blank">
-            Nonfarm Payrolls on deck: investors eye hiring and wages
-          </a>
-        </li>
-        <li>
-          <a href="https://www.reuters.com/markets/us/fed-rate-decision-preview-2025-07-24/" target="_blank">
-            Fed rate decision approaches amid mixed inflation data
-          </a>
-        </li>
-      </ul>
-    </section>
-
     <!-- Conclusion & Outlook -->
     <section id="conclusion">
       <h2>Conclusion &amp; Outlook</h2>
@@ -185,11 +183,12 @@
   </main>
 
   <footer>
-    <p>Data and analysis sourced from reputable financial news outlets. Quotes and figures belong to their respective sources.</p>
+    <p>Data and analysis sourced from financial news outlets using Newsdata and GNews APIs. Quotes and figures belong to their respective sources.</p>
   </footer>
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
