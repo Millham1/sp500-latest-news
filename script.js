@@ -1,56 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Market snapshot bar chart
-  const snapshotCtx = document.getElementById("snapshotChart").getContext("2d");
-  new Chart(snapshotCtx, {
-    type: "bar",
-    data: {
-      labels: ["S&P 500", "Nasdaq", "Dow"],
-      datasets: [{
-        label: "Daily Change (%)",
-        data: [0.1, 0.2, -0.7],
-        backgroundColor: ["#7FB77E", "#7FB77E", "#7FB77E"],
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        x: {
-          title: { display: true, text: "Index", color: "#030a18", font: { size: 12, weight: "bold" } },
-          ticks: { color: "#030a18", font: { size: 12 } },
-        },
-        y: {
-          min: -1.0, max: 0.3,
-          ticks: {
-            color: "#030a18",
-            font: { size: 12 },
-            stepSize: 0.2,
-            callback: val => `${val}%`,
-          },
-          title: {
-            display: true, text: "Daily Change (%)",
-            color: "#030a18", font: { size: 12, weight: "bold" },
-          },
-        },
-      },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => {
-              const val = ctx.parsed.y;
-              return `${val > 0 ? "+" : ""}${val.toFixed(1)}%`;
-            },
-          },
-        },
-      },
-    },
-  });
-
-  // S&P 500 stocks monitored for the ticker
+  // Ticker symbol list and fallback data
   const tickerSymbols = ["AAPL","MSFT","GOOGL","AMZN","NVDA","TSLA","BRK-B","META","JPM","JNJ"];
   const stocksData = [
-    // Fallback data to ensure the ticker and movers display something immediately
     { symbol: "NVDA", name: "NVIDIA Corp.", prevClose: 600, lastClose: 606, volume: 51000000 },
     { symbol: "AAPL", name: "Apple Inc.", prevClose: 190, lastClose: 193, volume: 54000000 },
     { symbol: "MSFT", name: "Microsoft Corp.", prevClose: 360, lastClose: 359, volume: 32000000 },
@@ -62,12 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
     { symbol: "JNJ", name: "Johnson & Johnson", prevClose: 155, lastClose: 156.2, volume: 15000000 },
     { symbol: "BRK-B", name: "Berkshire Hathaway", prevClose: 420, lastClose: 423.5, volume: 9000000 },
   ];
-  // Render fallback immediately
-  updateTicker();
 
   function computePercentChange(stock) {
     return ((stock.lastClose - stock.prevClose) / stock.prevClose) * 100;
   }
+
   function updateTicker() {
     const listEl = document.getElementById("ticker-list");
     if (!listEl) return;
@@ -75,11 +25,16 @@ document.addEventListener("DOMContentLoaded", function () {
     listEl.innerHTML = "";
     sorted.forEach(stock => {
       const change = computePercentChange(stock);
+      const price = stock.lastClose.toFixed(2);
+      const arrow = change >= 0 ? "↑" : "↓";
+      const arrowClass = change >= 0 ? "arrow-up" : "arrow-down";
       const item = document.createElement("div");
       item.className = "ticker-item " + (change >= 0 ? "positive" : "negative");
       item.dataset.symbol = stock.symbol;
-      const shortName = stock.name.split(" ")[0];
-      item.innerHTML = `<span class="symbol">${stock.symbol}</span><span class="name">${shortName}</span><span class="change">${change >= 0 ? "+" : ""}${change.toFixed(2)}%</span>`;
+      item.innerHTML = `<span class="symbol">${stock.symbol}</span>` +
+                       `<span class="price">${price}</span>` +
+                       `<span class="change">${change >= 0 ? "+" : ""}${change.toFixed(2)}%</span>` +
+                       `<span class="arrow ${arrowClass}">${arrow}</span>`;
       listEl.appendChild(item);
     });
     updateMovers();
@@ -121,29 +76,31 @@ document.addEventListener("DOMContentLoaded", function () {
     advancersEl.innerHTML = "";
     declinersEl.innerHTML = "";
     topAdvancers.forEach(stock => {
-      const li = document.createElement("li");
       const pct = computePercentChange(stock);
+      const li = document.createElement("li");
       li.innerHTML = `<strong>${stock.name} (${stock.symbol}):</strong> +${pct.toFixed(2)}%`;
       advancersEl.appendChild(li);
     });
     topDecliners.forEach(stock => {
-      const li = document.createElement("li");
       const pct = computePercentChange(stock);
+      const li = document.createElement("li");
       li.innerHTML = `<strong>${stock.name} (${stock.symbol}):</strong> ${pct.toFixed(2)}%`;
       declinersEl.appendChild(li);
     });
   }
 
+  // Initialize with fallback and then fetch live data every 5 seconds
+  updateTicker();
   fetchStockData();
-  setInterval(fetchStockData, 5000); // refresh every 5 seconds
+  setInterval(fetchStockData, 5000);
 
+  // Ticker click handler to show details
   document.getElementById("ticker-list").addEventListener("click", e => {
     const item = e.target.closest(".ticker-item");
     if (!item) return;
     const symbol = item.dataset.symbol;
     const stock = stocksData.find(s => s.symbol === symbol);
     if (stock) {
-      const detailSection = document.getElementById("stock-detail");
       document.getElementById("detail-symbol").textContent = stock.symbol;
       document.getElementById("detail-name").textContent = stock.name;
       const pct = computePercentChange(stock);
@@ -151,14 +108,14 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("detail-prev").textContent = stock.prevClose.toFixed(2);
       document.getElementById("detail-last").textContent = stock.lastClose.toFixed(2);
       document.getElementById("detail-vol").textContent = Math.round(stock.volume).toLocaleString();
-      detailSection.classList.remove("hidden");
+      document.getElementById("stock-detail").classList.remove("hidden");
     }
   });
   document.getElementById("close-detail").addEventListener("click", () => {
     document.getElementById("stock-detail").classList.add("hidden");
   });
 
-  /* --- News feed setup --- */
+  /* --- Live news feed setup --- */
   const NEWS_API_KEY = "pub_9dc518a86a1147c48b4b072671ce3ca8";
   const stockNewsItems = [];
   const govNewsItems = [];
@@ -202,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     }
+    // fallback if no new data
     if (!added && stockNewsItems.length === 0) {
       const fallback = [
         { title: "Alphabet earnings propel S&P 500 tech giants to record highs", link: "https://example.com/alphabet-earnings-sp500" },
@@ -228,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     }
+    // fallback if no new data
     if (!added && govNewsItems.length === 0) {
       const fallback = [
         { title: "Markets await Q2 GDP release as economic momentum assessed", link: "https://example.com/gdp-q2-preview" },
@@ -246,5 +205,6 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(refreshStockNews, 600000);
   setInterval(refreshGovNews, 600000);
 });
+
 
 
