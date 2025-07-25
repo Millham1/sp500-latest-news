@@ -14,7 +14,7 @@
       <p class="subtitle">A market recap with key insights from July 24, 2025</p>
     </div>
     <div class="hero-image">
-      <!-- replace src with your own hero image file or remove this tag -->
+      <!-- Replace with your own image or remove this tag -->
       <img src="title_image.png" alt="Abstract stock market and AI graphic" />
     </div>
     <div id="ticker-bar">
@@ -25,8 +25,8 @@
 
   <main>
     <section id="stock-detail" class="hidden">
-      <h2 id="detail-symbol">AAPL</h2>
-      <p id="detail-name">Apple Inc.</p>
+      <h2 id="detail-symbol"></h2>
+      <p id="detail-name"></p>
       <table class="detail-table">
         <tbody>
           <tr><td>Percent Change</td><td id="detail-change"></td></tr>
@@ -47,12 +47,18 @@
         </div>
         <div class="snapshot-text">
           <ul>
-            <li>S&amp;P 500 &amp; Nasdaq closed at record highs; Dow declined</li>
-            <li>80% of reporting companies beat earnings expectations</li>
-            <li>Trade optimism from deals with Japan, Indonesia &amp; Philippines; progress with EU ahead of Aug 1 tariff deadline</li>
-            <li>Risk appetite improved as yields climbed while global equities &amp; crude rallied and gold eased</li>
+            <li><a href=":contentReference[oaicite:0]{index=0}" target="_blank">S&amp;P 500 &amp; Nasdaq closed at record highs; Dow declined</a></li>
+            <li><a href=":contentReference[oaicite:1]{index=1}" target="_blank">80% of reporting companies beat earnings expectations</a></li>
+            <li><a href=":contentReference[oaicite:2]{index=2}" target="_blank">Trade optimism from deals with Japan, Indonesia &amp; Philippines; progress with EU ahead of Aug 1 tariff deadline</a></li>
+            <li><a href=":contentReference[oaicite:3]{index=3}" target="_blank">Risk appetite improved as yields climbed while global equities &amp; crude rallied and gold eased</a></li>
           </ul>
         </div>
+      </div>
+      <div class="citations">
+        <a href=":contentReference[oaicite:4]{index=4}">[1]</a>
+        <a href=":contentReference[oaicite:5]{index=5}">[2]</a>
+        <a href=":contentReference[oaicite:6]{index=6}">[3]</a>
+        <a href=":contentReference[oaicite:7]{index=7}">[4]</a>
       </div>
     </section>
 
@@ -60,34 +66,25 @@
       <h2>Earnings &amp; Sector Drivers</h2>
       <div class="card-container">
         <div class="card">
-          <!-- replace src with your own AI illustration or remove -->
           <img src="ai_image.png" alt="S&amp;P 500 tech rally" />
           <h3>Alphabet &amp; AI Rally</h3>
-          <p>
-            Alphabet’s earnings beat and its $85 B AI investment lifted fellow
-            S&amp;P 500 tech giants like Nvidia and Microsoft, powering the
-            index to record highs.
-          </p>
+          <p>Alphabet’s earnings beat and its $85 B AI investment lifted fellow S&amp;P 500 tech giants like Nvidia and Microsoft, powering the index to record highs.</p>
         </div>
         <div class="card">
-          <!-- replace src with your own EV slump illustration or remove -->
           <img src="ev_image.png" alt="S&amp;P 500 industrial slump" />
           <h3>Tesla &amp; Industrial Slump</h3>
-          <p>
-            Tesla—one of the largest S&amp;P 500 constituents—slid after an
-            earnings miss and a “rough quarters” warning, while other S&amp;P 500
-            industrials like IBM and Honeywell also dropped.
-          </p>
+          <p>Tesla—one of the largest S&amp;P 500 constituents—slid after an earnings miss and a “rough quarters” warning, while other S&amp;P 500 industrials like IBM and Honeywell also dropped.</p>
         </div>
         <div class="card">
-          <!-- replace src with your own trade deals illustration or remove -->
-        //  <img src="trade_image.png" alt="Trade deals &amp; macro" />
+          <img src="trade_image.png" alt="Trade deals &amp; macro" />
           <h3>Trade Deals &amp; Macro</h3>
-          <p>
-            New trade agreements and progress with the EU bolstered market
-            sentiment for S&amp;P 500 companies as yields climbed and gold eased.
-          </p>
+          <p>New trade agreements and progress with the EU bolstered market sentiment for S&amp;P 500 companies as yields climbed and gold eased.</p>
         </div>
+      </div>
+      <div class="citations">
+        <a href=":contentReference[oaicite:8]{index=8}">[2]</a>
+        <a href=":contentReference[oaicite:9]{index=9}">[4]</a>
+        <a href=":contentReference[oaicite:10]{index=10}">[7]</a>
       </div>
     </section>
 
@@ -101,22 +98,6 @@
         <div class="decliners">
           <h3>Decliners</h3>
           <ul id="decliners-list"></ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="earnings">
-      <h2>Earnings Season Snapshot</h2>
-      <div class="earnings-container">
-        <div class="chart-wrapper">
-          <canvas id="earningsChart"></canvas>
-        </div>
-        <div class="earnings-text">
-          <ul>
-            <li>80% of reporting S&amp;P 500 companies beat analysts’ expectations</li>
-            <li>Only 5% missed estimates, highlighting resilient corporate profits</li>
-            <li>Strong beats fuel optimism but valuations are elevated; surprises could trigger volatility</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -136,9 +117,14 @@
       </table>
     </section>
 
-    <section id="gov-news">
+    <section id="stock-news">
       <h2>S&amp;P 500 Stock Headlines</h2>
-      <ul id="news-list"></ul>
+      <ul id="stock-news-list"></ul>
+    </section>
+
+    <section id="gov-news">
+      <h2>Government Report Headlines</h2>
+      <ul id="gov-news-list"></ul>
     </section>
 
     <section id="conclusion">
@@ -149,6 +135,15 @@
         <li>Trade negotiations and the Aug 1 tariff deadline will be pivotal for market direction</li>
         <li>Upcoming Fed meeting and macro data releases could spur volatility – stay vigilant</li>
       </ul>
+      <div class="citations">
+        <a href=":contentReference[oaicite:11]{index=11}">[1]</a>
+        <a href=":contentReference[oaicite:12]{index=12}">[2]</a>
+        <a href=":contentReference[oaicite:13]{index=13}">[3]</a>
+        <a href=":contentReference[oaicite:14]{index=14}">[4]</a>
+        <a href=":contentReference[oaicite:15]{index=15}">[6]</a>
+        <a href=":contentReference[oaicite:16]{index=16}">[7]</a>
+        <a href=":contentReference[oaicite:17]{index=17}">[8]</a>
+      </div>
     </section>
   </main>
 
@@ -158,4 +153,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
