@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Ticker symbol list and fallback data
+  // Ticker symbols and fallback data (initial display)
   const tickerSymbols = ["AAPL","MSFT","GOOGL","AMZN","NVDA","TSLA","BRK-B","META","JPM","JNJ"];
   const stocksData = [
     { symbol: "NVDA", name: "NVIDIA Corp.", prevClose: 600, lastClose: 606, volume: 51000000 },
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { symbol: "META", name: "Meta Platforms", prevClose: 320, lastClose: 326, volume: 24000000 },
     { symbol: "JPM", name: "JPMorgan Chase", prevClose: 190, lastClose: 188, volume: 18000000 },
     { symbol: "JNJ", name: "Johnson & Johnson", prevClose: 155, lastClose: 156.2, volume: 15000000 },
-    { symbol: "BRK-B", name: "Berkshire Hathaway", prevClose: 420, lastClose: 423.5, volume: 9000000 },
+    { symbol: "BRK-B", name: "Berkshire Hathaway", prevClose: 420, lastClose: 423.5, volume: 9000000 }
   ];
 
   function computePercentChange(stock) {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sorted.forEach(stock => {
       const change = computePercentChange(stock);
       const price = stock.lastClose.toFixed(2);
-      const arrow = change >= 0 ? "↑" : "↓";
+      const arrowSymbol = change >= 0 ? "↑" : "↓";
       const arrowClass = change >= 0 ? "arrow-up" : "arrow-down";
       const item = document.createElement("div");
       item.className = "ticker-item " + (change >= 0 ? "positive" : "negative");
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
       item.innerHTML = `<span class="symbol">${stock.symbol}</span>` +
                        `<span class="price">${price}</span>` +
                        `<span class="change">${change >= 0 ? "+" : ""}${change.toFixed(2)}%</span>` +
-                       `<span class="arrow ${arrowClass}">${arrow}</span>`;
+                       `<span class="arrow ${arrowClass}">${arrowSymbol}</span>`;
       listEl.appendChild(item);
     });
     updateMovers();
@@ -55,19 +55,18 @@ document.addEventListener("DOMContentLoaded", function () {
           name: item.shortName || item.longName || item.symbol,
           prevClose: item.regularMarketPreviousClose,
           lastClose: item.regularMarketPrice,
-          volume: item.regularMarketVolume,
+          volume: item.regularMarketVolume
         });
       });
       updateTicker();
-    } catch (error) {
-      console.error("Error fetching stock data:", error);
+    } catch (err) {
+      console.error("Error fetching stock data:", err);
     }
   }
 
   function updateMovers() {
     const advancersEl = document.getElementById("advancers-list");
     const declinersEl = document.getElementById("decliners-list");
-    if (!advancersEl || !declinersEl) return;
     const sorted = stocksData.slice().sort((a, b) => computePercentChange(b) - computePercentChange(a));
     const positive = sorted.filter(s => computePercentChange(s) > 0);
     const negative = sorted.filter(s => computePercentChange(s) < 0);
@@ -89,33 +88,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Initialize with fallback and then fetch live data every 5 seconds
+  // Initial display with fallback, then fetch live data every 5 seconds
   updateTicker();
   fetchStockData();
   setInterval(fetchStockData, 5000);
 
-  // Ticker click handler to show details
-  document.getElementById("ticker-list").addEventListener("click", e => {
+  // Show detail panel on ticker click
+  document.getElementById("ticker-list").addEventListener("click", (e) => {
     const item = e.target.closest(".ticker-item");
     if (!item) return;
     const symbol = item.dataset.symbol;
     const stock = stocksData.find(s => s.symbol === symbol);
-    if (stock) {
-      document.getElementById("detail-symbol").textContent = stock.symbol;
-      document.getElementById("detail-name").textContent = stock.name;
-      const pct = computePercentChange(stock);
-      document.getElementById("detail-change").textContent = `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
-      document.getElementById("detail-prev").textContent = stock.prevClose.toFixed(2);
-      document.getElementById("detail-last").textContent = stock.lastClose.toFixed(2);
-      document.getElementById("detail-vol").textContent = Math.round(stock.volume).toLocaleString();
-      document.getElementById("stock-detail").classList.remove("hidden");
-    }
+    if (!stock) return;
+    // Populate detail panel
+    const pct = computePercentChange(stock);
+    document.getElementById("detail-symbol").textContent = stock.symbol;
+    document.getElementById("detail-name").textContent = stock.name;
+    document.getElementById("detail-change").textContent = `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
+    document.getElementById("detail-prev").textContent = stock.prevClose.toFixed(2);
+    document.getElementById("detail-last").textContent = stock.lastClose.toFixed(2);
+    document.getElementById("detail-vol").textContent = Math.round(stock.volume).toLocaleString();
+    document.getElementById("stock-detail").classList.remove("hidden");
   });
+
   document.getElementById("close-detail").addEventListener("click", () => {
     document.getElementById("stock-detail").classList.add("hidden");
   });
 
-  /* --- Live news feed setup --- */
+  /* --- Live news feed for S&P 500 stocks and economic reports --- */
   const NEWS_API_KEY = "pub_9dc518a86a1147c48b4b072671ce3ca8";
   const stockNewsItems = [];
   const govNewsItems = [];
@@ -152,19 +152,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (data && data.status === "success" && Array.isArray(data.results)) {
       data.results.forEach(article => {
         if (!stockNewsItems.some(it => it.link === article.link)) {
-          const item = { title: article.title, link: article.link };
-          stockNewsItems.push(item);
-          renderStockNewsItem(item);
+          stockNewsItems.push({ title: article.title, link: article.link });
+          renderStockNewsItem(article);
           added = true;
         }
       });
     }
-    // fallback if no new data
     if (!added && stockNewsItems.length === 0) {
+      // fallback if API fails and no news is present
       const fallback = [
-        { title: "Alphabet earnings propel S&P 500 tech giants to record highs", link: "https://example.com/alphabet-earnings-sp500" },
-        { title: "Tesla slump drags S&P 500 industrials after earnings miss", link: "https://example.com/tesla-slump-sp500" },
-        { title: "Trade deals boost sentiment for S&P 500 companies ahead of tariff deadline", link: "https://example.com/trade-deals-sp500" },
+        { title: "Alphabet earnings propel S&P 500 tech giants to record highs", link: "https://www.investopedia.com/s-and-p-500-gains-and-losses-today-west-pharmaceutical-services-stock-surges-dow-lkq-shares-fall-11778429" },
+        { title: "Tesla slump drags S&P 500 industrials after earnings miss", link: "https://www.investopedia.com/s-and-p-500-gains-and-losses-today-west-pharmaceutical-services-stock-surges-dow-lkq-shares-fall-11778429" },
+        { title: "Trade deals boost sentiment for S&P 500 companies ahead of tariff deadline", link: "https://www.investopedia.com/s-and-p-500-gains-and-losses-today-west-pharmaceutical-services-stock-surges-dow-lkq-shares-fall-11778429" }
       ];
       fallback.forEach(article => {
         stockNewsItems.push(article);
@@ -179,19 +178,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (data && data.status === "success" && Array.isArray(data.results)) {
       data.results.forEach(article => {
         if (!govNewsItems.some(it => it.link === article.link)) {
-          const item = { title: article.title, link: article.link };
-          govNewsItems.push(item);
-          renderGovNewsItem(item);
+          govNewsItems.push({ title: article.title, link: article.link });
+          renderGovNewsItem(article);
           added = true;
         }
       });
     }
-    // fallback if no new data
     if (!added && govNewsItems.length === 0) {
+      // fallback if API fails and no news is present
       const fallback = [
-        { title: "Markets await Q2 GDP release as economic momentum assessed", link: "https://example.com/gdp-q2-preview" },
-        { title: "Nonfarm Payrolls on deck: investors eye hiring and wages", link: "https://example.com/nonfarm-payrolls-preview" },
-        { title: "Fed rate decision approaches amid mixed inflation data", link: "https://example.com/fomc-preview" },
+        { title: "Markets await Q2 GDP release as economic momentum assessed", link: "https://www.reuters.com/world/us/us-economy-eyes-gdp-report-2025-07-24/" },
+        { title: "Nonfarm Payrolls on deck: investors eye hiring and wages", link: "https://www.reuters.com/world/us/us-jobs-report-watch-2025-07-24/" },
+        { title: "Fed rate decision approaches amid mixed inflation data", link: "https://www.reuters.com/markets/us/fed-rate-decision-preview-2025-07-24/" }
       ];
       fallback.forEach(article => {
         govNewsItems.push(article);
@@ -205,6 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(refreshStockNews, 600000);
   setInterval(refreshGovNews, 600000);
 });
+
 
 
 
