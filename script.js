@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   // Preload with fallback values to prevent blank ticker
   const tickerSymbols = ["AAPL","MSFT","GOOGL","AMZN","NVDA","TSLA","BRK-B","META","JPM","JNJ"];
@@ -209,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(refreshStockNews, 600000);
   setInterval(refreshGovNews, 600000);
 });
+
 
 
 
