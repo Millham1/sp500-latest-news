@@ -45,7 +45,7 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  max-height: none;    /* show all items */
+  max-height: none;    /* show all 10 items */
   overflow-y: visible; /* no scroll */
 }
 .ticker-item {
@@ -104,15 +104,27 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 }
 .gov-table th { background: #97b1df; color: #ffffff; }
 
-/* News list */
-#news-list {
+/* Stock and gov headline lists */
+#stock-news-list,
+#gov-news-list {
   list-style: none;
   padding-left: 0;
   margin: 1rem 0 0 0;
 }
-#news-list li { margin-bottom: 0.5rem; font-size: 0.9rem; }
-#news-list a { color: #1e40af; text-decoration: none; }
-#news-list a:hover { text-decoration: underline; }
+#stock-news-list li,
+#gov-news-list li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+#stock-news-list a,
+#gov-news-list a {
+  color: #1e40af;
+  text-decoration: none;
+}
+#stock-news-list a:hover,
+#gov-news-list a:hover {
+  text-decoration: underline;
+}
 
 /* Section containers */
 main section {
@@ -131,7 +143,7 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 .snapshot-text { flex: 1 1 45%; min-width: 260px; }
 .snapshot-text ul { list-style: disc; padding-left: 1.5rem; }
 
-/* Driver cards */
+/* Drivers */
 .card-container { display: flex; flex-wrap: wrap; gap: 1rem; }
 .card {
   flex: 1 1 30%; min-width: 260px;
@@ -167,14 +179,7 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 .movers-container h3 { margin-top: 0; }
 .movers-container ul { list-style: disc; padding-left: 1.5rem; }
 
-/* Earnings section */
-.earnings-container {
-  display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
-}
-.earnings-container .chart-wrapper {
-  flex: 1 1 45%; min-width: 260px;
-}
-.earnings-container .earnings-text {
-  flex: 1 1 45%; min-width: 260px;
-}
+/* Earnings section removed */
+.earnings-container { display: none; }
+
 
