@@ -12,26 +12,23 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 
 /* Hero section */
 .hero {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 3rem 2rem;
+  padding: 2rem 2rem;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
   position: relative;
+  text-align: center; /* center the title */
 }
-.hero-content { flex: 1 1 55%; min-width: 300px; padding-right: 1rem; }
-.hero-content h1 { font-size: 2.8rem; margin-bottom: 0.5rem; }
-.hero-content .subtitle { font-size: 1.2rem; color: #374151; }
-.hero-image { flex: 1 1 45%; min-width: 300px; text-align: right; }
-.hero-image img { max-width: 100%; height: auto; border-radius: 8px; }
+.hero-title {
+  font-size: 3rem;
+  margin: 0 0 1rem 0;
+}
 
 /* Ticker bar */
 #ticker-bar {
   position: absolute;
-  top: 1rem;
+  top: 0.5rem;
   right: 1rem;
-  width: 260px;
+  width: 280px;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
   border-radius: 6px;
@@ -45,12 +42,13 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  max-height: none;    /* show all 10 items */
-  overflow-y: visible; /* no scroll */
+  max-height: none;
+  overflow-y: visible;
 }
 .ticker-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
   padding: 0.2rem 0.1rem;
   border-radius: 4px;
@@ -58,17 +56,21 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 }
 .ticker-item:hover { background: #e5e7eb; }
 .ticker-item span.symbol { font-weight: bold; margin-right: 0.25rem; }
-.ticker-item span.change { font-weight: bold; }
-.ticker-item.positive span.change { color: #008000; }
-.ticker-item.negative span.change { color: #e00000; }
+.ticker-item span.price { color: #374151; margin-right: 0.25rem; }
+.ticker-item span.change { font-weight: bold; margin-right: 0.25rem; }
+.arrow-up { color: #00c853; font-weight: bold; }
+.arrow-down { color: #e53935; font-weight: bold; }
 
-/* Stock detail */
+/* Stock detail panel */
 #stock-detail {
   background: #ffffff;
-  margin: 1rem 2rem;
-  padding: 1.5rem;
+  margin-top: 1.25rem;
+  padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 #stock-detail.hidden { display: none; }
 #stock-detail h2 { margin-top: 0; margin-bottom: 0.3rem; }
@@ -104,7 +106,7 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
 }
 .gov-table th { background: #97b1df; color: #ffffff; }
 
-/* Stock and government headline lists */
+/* News lists */
 #stock-news-list,
 #gov-news-list {
   list-style: none;
@@ -126,13 +128,7 @@ h1, h2, h3, h4 { font-weight: 700; margin-top: 0; }
   text-decoration: underline;
 }
 
-/* citation styling: small text under headlines */
-.citation-text {
-  font-size: 0.75rem;
-  color: #6b7280; /* greyish for subtlety */
-}
-
-/* Section containers */
+/* Section layout */
 main section {
   background: #ffffff;
   margin: 1rem 2rem;
@@ -142,14 +138,10 @@ main section {
 }
 main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 
-/* Snapshot section layout */
-.snapshot-container { display: flex; flex-wrap: wrap; gap: 1rem; }
-.chart-wrapper { flex: 1 1 45%; min-width: 260px; height: 300px; }
-.chart-caption { font-size: 0.8rem; color: #555; margin-top: 0.3rem; font-style: italic; }
-.snapshot-text { flex: 1 1 45%; min-width: 260px; }
+/* Snapshot text */
 .snapshot-text ul { list-style: disc; padding-left: 1.5rem; }
 
-/* Driver cards */
+/* Drivers */
 .card-container { display: flex; flex-wrap: wrap; gap: 1rem; }
 .card {
   flex: 1 1 30%; min-width: 260px;
@@ -169,7 +161,7 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 .card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
 .card p { font-size: 0.95rem; flex: 1; }
 
-/* Movers section */
+/* Movers */
 .movers-container { display: flex; flex-wrap: wrap; gap: 2rem; }
 .advancers, .decliners {
   flex: 1 1 45%; min-width: 260px; padding: 1rem; border-radius: 8px;
@@ -184,6 +176,7 @@ main h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 }
 .movers-container h3 { margin-top: 0; }
 .movers-container ul { list-style: disc; padding-left: 1.5rem; }
+
 
 
 
