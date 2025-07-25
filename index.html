@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>S&P 500 Latest News</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js for charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>S&amp;P 500 Record Highs & Earnings Impact</h1>
+      <p class="subtitle">A market recap with key insights from July 24, 2025</p>
+    </div>
+    <div class="hero-image">
+      <!-- Placeholder image; replace src with your own image URL or data URI -->
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAE0lEQVR4nGNgYGBgYAAAAAUAAYozWk4AAAAASUVORK5CYII=" alt="Market graphic">
+    </div>
+    <!-- Live ticker bar for top movers -->
+    <div id="ticker-bar">
+      <h4>Top Movers</h4>
+      <div id="ticker-list"></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="stock-detail" class="hidden">
+      <h2 id="detail-symbol"></h2>
+      <p id="detail-name"></p>
+      <table class="detail-table">
+        <tbody>
+          <tr><td>Percent Change</td><td id="detail-change"></td></tr>
+          <tr><td>Previous Close</td><td id="detail-prev"></td></tr>
+          <tr><td>Last Close</td><td id="detail-last"></td></tr>
+          <tr><td>Volume</td><td id="detail-vol"></td></tr>
+        </tbody>
+      </table>
+      <button id="close-detail">Close</button>
+    </section>
+
+    <!-- Snapshot section -->
+    <section id="snapshot">
+      <h2>Market Snapshot & Highlights</h2>
+      <div class="snapshot-container">
+        <div class="chart-wrapper">
+          <canvas id="snapshotChart"></canvas>
+          <p class="chart-caption">Daily percentage change (July 24, 2025)</p>
+        </div>
+        <div class="snapshot-text">
+          <ul>
+            <li>S&P 500 & Nasdaq closed at record highs; Dow declined</li>
+            <li>80% of reporting companies beat earnings expectations</li>
+            <li>Trade optimism from deals with Japan, Indonesia & Philippines; progress with EU ahead of Aug 1 tariff deadline</li>
+            <li>Risk appetite improved as yields climbed while global equities & crude rallied and gold eased</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Citation links omitted for brevity -->
+    </section>
+
+    <!-- Drivers section -->
+    <section id="drivers">
+      <h2>Earnings & Sector Drivers</h2>
+      <div class="card-container">
+        <div class="card">
+          <!-- Placeholder images; you can replace with your own -->
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAE0lEQVR4nGNgYGBgYAAAAAUAAYozWk4AAAAASUVORK5CYII=" alt="AI rally">
+          <h3>Alphabet & AI Rally</h3>
+          <p>Alphabet’s earnings beat and its $85 B AI investment lifted tech giants like Nvidia.</p>
+        </div>
+        <div class="card">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAE0lEQVR4nGNgYGBgYAAAAAUAAYozWk4AAAAASUVORK5CYII=" alt="Tesla slump">
+          <h3>Tesla & Industrial Slump</h3>
+          <p>Tesla shares slid ~8% after an earnings miss and “rough quarters” warning; IBM and Honeywell also dropped.</p>
+        </div>
+        <div class="card">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAE0lEQVR4nGNgYGBgYAAAAAUAAYozWk4AAAAASUVORK5CYII=" alt="Trade deals">
+          <h3>Trade Deals & Macro</h3>
+          <p>New trade agreements and progress with the EU bolstered sentiment as yields climbed and gold eased.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Movers section -->
+    <section id="movers">
+      <h2>Biggest Movers</h2>
+      <div class="movers-container">
+        <div class="advancers">
+          <h3>Advancers</h3>
+          <ul>
+            <li><strong>West Pharmaceutical Services:</strong> +23% on strong Q2 results & raised guidance</li>
+            <li><strong>United Rentals:</strong> +9% after profit beat, expanded buyback & dividend</li>
+            <li><strong>Labcorp:</strong> +6.9% on beat‑and‑raise results across diagnostics & biopharma</li>
+          </ul>
+        </div>
+        <div class="decliners">
+          <h3>Decliners</h3>
+          <ul>
+            <li><strong>LKQ Corp.:</strong> −18% after cutting revenue, EPS & cash flow forecasts</li>
+            <li><strong>Dow Inc.:</strong> −17.5% on wider loss & dividend cut across segments</li>
+            <li><strong>Molina Healthcare:</strong> −17% after trimming full‑year profit guidance</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline & Metrics -->
+    <section id="timeline">
+      <h2>Market Drivers Timeline</h2>
+      <div class="timeline-container">
+        <div class="timeline-item"><span class="timeline-number">1</span><h4>AI Earnings</h4><p>Alphabet’s beat lifts tech stocks</p></div>
+        <div class="timeline-item"><span class="timeline-number">2</span><h4>Tesla & Industrials</h4><p>EV & industrial stocks slump after earnings</p></div>
+        <div class="timeline-item"><span class="timeline-number">3</span><h4>Trade Deals</h4><p>Japan & EU agreements bolster sentiment</p></div>
+      </div>
+      <div class="metrics-table-wrapper">
+        <table>
+          <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>S&P 500</td><td>6,363.35</td></tr>
+            <tr><td>Nasdaq</td><td>21,057.96</td></tr>
+            <tr><td>Dow</td><td>44,693.91</td></tr>
+            <tr><td>10‑yr Yield</td><td>4.40%</td></tr>
+            <tr><td>WTI Crude</td><td>$66.03</td></tr>
+            <tr><td>Gold</td><td>$3,370</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Earnings Season -->
+    <section id="earnings">
+      <h2>Earnings Season Snapshot</h2>
+      <div class="earnings-container">
+        <div class="chart-wrapper"><canvas id="earningsChart"></canvas></div>
+        <div class="earnings-text">
+          <ul>
+            <li>80% of reporting S&P 500 companies beat analysts’ expectations</li>
+            <li>Only 5% missed estimates, highlighting resilient corporate profits</li>
+            <li>Strong beats fuel optimism but valuations are elevated; surprises could trigger volatility</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Government Reports -->
+    <section id="gov-reports">
+      <h2>Upcoming Government Reports</h2>
+      <table class="gov-table">
+        <thead><tr><th>Date & Time (ET)</th><th>Report</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Jul 26, 2025 08:30</td><td>GDP (Q2) Advance</td><td>First estimate of GDP growth for Q2</td></tr>
+          <tr><td>Jul 31, 2025 08:30</td><td>Nonfarm Payrolls</td><td>Monthly jobs report showing employment gains and unemployment rate</td></tr>
+          <tr><td>Aug 01, 2025 10:00</td><td>ISM Manufacturing PMI</td><td>Index of U.S. manufacturing activity</td></tr>
+          <tr><td>Aug 02, 2025 14:00</td><td>FOMC Rate Decision</td><td>Federal Reserve announcement on interest rates</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Government Report Headlines -->
+    <section id="gov-news">
+      <h2>Government Report Headlines</h2>
+      <ul id="news-list"></ul>
+    </section>
+
+    <!-- Conclusion -->
+    <section id="conclusion">
+      <h2>Conclusion & Outlook</h2>
+      <ul class="conclusion-list">
+        <li>Record highs mask mixed performance across sectors</li>
+        <li>Earnings season strong: majority beat estimates, yet valuations remain stretched</li>
+        <li>Trade negotiations and the Aug 1 tariff deadline will be pivotal for market direction</li>
+        <li>Upcoming Fed meeting and macro data releases could spur volatility – stay vigilant</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Data and analysis sourced from reliable financial news outlets. Quotes and figures belong to their respective sources.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
