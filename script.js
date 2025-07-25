@@ -47,14 +47,27 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  // List of monitored S&P 500 stocks
+  // S&P 500 stocks monitored for the ticker
   const tickerSymbols = ["AAPL","MSFT","GOOGL","AMZN","NVDA","TSLA","BRK-B","META","JPM","JNJ"];
-  const stocksData = [];
+  const stocksData = [
+    // Fallback data to ensure the ticker and movers display something immediately
+    { symbol: "NVDA", name: "NVIDIA Corp.", prevClose: 600, lastClose: 606, volume: 51000000 },
+    { symbol: "AAPL", name: "Apple Inc.", prevClose: 190, lastClose: 193, volume: 54000000 },
+    { symbol: "MSFT", name: "Microsoft Corp.", prevClose: 360, lastClose: 359, volume: 32000000 },
+    { symbol: "GOOGL", name: "Alphabet Inc.", prevClose: 180, lastClose: 183, volume: 28000000 },
+    { symbol: "AMZN", name: "Amazon.com Inc.", prevClose: 160, lastClose: 162.5, volume: 33000000 },
+    { symbol: "TSLA", name: "Tesla Inc.", prevClose: 250, lastClose: 231, volume: 60000000 },
+    { symbol: "META", name: "Meta Platforms", prevClose: 320, lastClose: 326, volume: 24000000 },
+    { symbol: "JPM", name: "JPMorgan Chase", prevClose: 190, lastClose: 188, volume: 18000000 },
+    { symbol: "JNJ", name: "Johnson & Johnson", prevClose: 155, lastClose: 156.2, volume: 15000000 },
+    { symbol: "BRK-B", name: "Berkshire Hathaway", prevClose: 420, lastClose: 423.5, volume: 9000000 },
+  ];
+  // Render fallback immediately
+  updateTicker();
 
   function computePercentChange(stock) {
     return ((stock.lastClose - stock.prevClose) / stock.prevClose) * 100;
   }
-
   function updateTicker() {
     const listEl = document.getElementById("ticker-list");
     if (!listEl) return;
@@ -93,22 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
       updateTicker();
     } catch (error) {
       console.error("Error fetching stock data:", error);
-      if (stocksData.length === 0) {
-        const fallback = [
-          { symbol: "NVDA", name: "NVIDIA Corp.", prevClose: 600.0, lastClose: 606.0, volume: 51000000 },
-          { symbol: "AAPL", name: "Apple Inc.", prevClose: 190.0, lastClose: 193.0, volume: 54000000 },
-          { symbol: "MSFT", name: "Microsoft Corp.", prevClose: 360.0, lastClose: 359.0, volume: 32000000 },
-          { symbol: "GOOGL", name: "Alphabet Inc.", prevClose: 180.0, lastClose: 183.0, volume: 28000000 },
-          { symbol: "AMZN", name: "Amazon.com Inc.", prevClose: 160.0, lastClose: 162.5, volume: 33000000 },
-          { symbol: "TSLA", name: "Tesla Inc.", prevClose: 250.0, lastClose: 231.0, volume: 60000000 },
-          { symbol: "META", name: "Meta Platforms", prevClose: 320.0, lastClose: 326.0, volume: 24000000 },
-          { symbol: "JPM", name: "JPMorgan Chase", prevClose: 190.0, lastClose: 188.0, volume: 18000000 },
-          { symbol: "JNJ", name: "Johnson & Johnson", prevClose: 155.0, lastClose: 156.2, volume: 15000000 },
-          { symbol: "BRK-B", name: "Berkshire Hathaway", prevClose: 420.0, lastClose: 423.5, volume: 9000000 },
-        ];
-        fallback.forEach(item => stocksData.push({ ...item }));
-        updateTicker();
-      }
     }
   }
 
@@ -138,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   fetchStockData();
-  setInterval(fetchStockData, 5000); // update every 5 seconds
+  setInterval(fetchStockData, 5000); // refresh every 5 seconds
 
   document.getElementById("ticker-list").addEventListener("click", e => {
     const item = e.target.closest(".ticker-item");
@@ -161,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("stock-detail").classList.add("hidden");
   });
 
-  // News feed code
+  /* --- News feed setup --- */
   const NEWS_API_KEY = "pub_9dc518a86a1147c48b4b072671ce3ca8";
   const stockNewsItems = [];
   const govNewsItems = [];
@@ -181,14 +178,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function renderStockNewsItem(article) {
     const list = document.getElementById("stock-news-list");
-    if (!list) return;
     const li = document.createElement("li");
     li.innerHTML = `<a href="${article.link}" target="_blank">${article.title}</a>`;
     list.appendChild(li);
   }
   function renderGovNewsItem(article) {
     const list = document.getElementById("gov-news-list");
-    if (!list) return;
     const li = document.createElement("li");
     li.innerHTML = `<a href="${article.link}" target="_blank">${article.title}</a>`;
     list.appendChild(li);
@@ -251,4 +246,5 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(refreshStockNews, 600000);
   setInterval(refreshGovNews, 600000);
 });
+
 
