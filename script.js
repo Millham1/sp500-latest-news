@@ -1,5 +1,6 @@
+// Run after the page loads
 document.addEventListener("DOMContentLoaded", function () {
-  // Market snapshot bar chart
+  // Bar chart for daily index moves
   const snapshotCtx = document.getElementById("snapshotChart").getContext("2d");
   new Chart(snapshotCtx, {
     type: "bar",
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  // Earnings season doughnut chart
+  // Doughnut chart for earnings season
   const earningsCtx = document.getElementById("earningsChart").getContext("2d");
   new Chart(earningsCtx, {
     type: "doughnut",
@@ -69,11 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  // Live ticker powered by Yahoo Finance (with fallback)
+  // Live ticker setup
   const tickerSymbols = ["AAPL","MSFT","GOOGL","AMZN","NVDA","TSLA","BRK-B","META","JPM","JNJ"];
   const stocksData = [];
-  const NEWS_API_KEY = "pub_9dc518a86a1147c48b4b072671ce3ca8"; // from your earlier message
-
   function computePercentChange(stock) {
     return ((stock.lastClose - stock.prevClose) / stock.prevClose) * 100;
   }
@@ -91,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
       item.innerHTML = `<span class="symbol">${stock.symbol}</span><span class="name">${shortName}</span><span class="change">${change >= 0 ? "+" : ""}${change.toFixed(2)}%</span>`;
       listEl.appendChild(item);
     });
+    updateMovers();
   }
   async function fetchStockData() {
     try {
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const apiUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${symbolsParam}`;
       const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`;
       const response = await fetch(proxyUrl);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (!response.ok) throw new Error(`HTTP error ${response.status}`);
       const data = await response.json();
       stocksData.length = 0;
       data.quoteResponse.result.forEach(item => {
@@ -112,8 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       updateTicker();
     } catch (error) {
-      console.error("Ticker fetch error:", error);
-      // Fallback data if fetch fails
+      console.error("Error fetching stock data:", error);
       if (stocksData.length === 0) {
         const fallback = [
           { symbol: "NVDA", name: "NVIDIA Corp.", prevClose: 600.0, lastClose: 606.0, volume: 51000000 },
@@ -127,39 +126,61 @@ document.addEventListener("DOMContentLoaded", function () {
           { symbol: "JNJ", name: "Johnson & Johnson", prevClose: 155.0, lastClose: 156.2, volume: 15000000 },
           { symbol: "BRK-B", name: "Berkshire Hathaway", prevClose: 420.0, lastClose: 423.5, volume: 9000000 },
         ];
-        fallback.forEach(item => stocksData.push({...item}));
+        fallback.forEach(item => stocksData.push({ ...item }));
         updateTicker();
       }
     }
   }
+  function updateMovers() {
+    const advancersEl = document.getElementById("advancers-list");
+    const declinersEl = document.getElementById("decliners-list");
+    if (!advancersEl || !declinersEl) return;
+    const sorted = stocksData.slice().sort((a, b) => computePercentChange(b) - computePercentChange(a));
+    const positive = sorted.filter(s => computePercentChange(s) > 0);
+    const negative = sorted.filter(s => computePercentChange(s) < 0);
+    const topAdvancers = positive.slice(0, 3);
+    const topDecliners = negative.slice(0, 3);
+    advancersEl.innerHTML = "";
+    declinersEl.innerHTML = "";
+    topAdvancers.forEach(stock => {
+      const li = document.createElement("li");
+      const pct = computePercentChange(stock);
+      li.innerHTML = `<strong>${stock.name} (${stock.symbol}):</strong> +${pct.toFixed(2)}%`;
+      advancersEl.appendChild(li);
+    });
+    topDecliners.forEach(stock => {
+      const li = document.createElement("li");
+      const pct = computePercentChange(stock);
+      li.innerHTML = `<strong>${stock.name} (${stock.symbol}):</strong> ${pct.toFixed(2)}%`;
+      declinersEl.appendChild(li);
+    });
+  }
   fetchStockData();
-  setInterval(fetchStockData, 600000);
+  setInterval(fetchStockData, 5000); // update every 5 seconds
 
-  // Show details on ticker click
-  const tickerListEl = document.getElementById("ticker-list");
-  tickerListEl.addEventListener("click", e => {
+  document.getElementById("ticker-list").addEventListener("click", e => {
     const item = e.target.closest(".ticker-item");
     if (!item) return;
     const symbol = item.dataset.symbol;
     const stock = stocksData.find(s => s.symbol === symbol);
-    if (stock) showStockDetails(stock);
+    if (stock) {
+      const detailSection = document.getElementById("stock-detail");
+      document.getElementById("detail-symbol").textContent = stock.symbol;
+      document.getElementById("detail-name").textContent = stock.name;
+      const pct = computePercentChange(stock);
+      document.getElementById("detail-change").textContent = `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
+      document.getElementById("detail-prev").textContent = stock.prevClose.toFixed(2);
+      document.getElementById("detail-last").textContent = stock.lastClose.toFixed(2);
+      document.getElementById("detail-vol").textContent = Math.round(stock.volume).toLocaleString();
+      detailSection.classList.remove("hidden");
+    }
   });
-  function showStockDetails(stock) {
-    const detailSection = document.getElementById("stock-detail");
-    document.getElementById("detail-symbol").textContent = stock.symbol;
-    document.getElementById("detail-name").textContent = stock.name;
-    const pct = computePercentChange(stock);
-    document.getElementById("detail-change").textContent = `${pct >= 0 ? "+" : ""}${pct.toFixed(2)}%`;
-    document.getElementById("detail-prev").textContent = stock.prevClose.toFixed(2);
-    document.getElementById("detail-last").textContent = stock.lastClose.toFixed(2);
-    document.getElementById("detail-vol").textContent = Math.round(stock.volume).toLocaleString();
-    detailSection.classList.remove("hidden");
-  }
   document.getElementById("close-detail").addEventListener("click", () => {
     document.getElementById("stock-detail").classList.add("hidden");
   });
 
-  // Live government/economic news feed
+  // Live news feed for S&P 500 stocks
+  const NEWS_API_KEY = "pub_9dc518a86a1147c48b4b072671ce3ca8";
   let newsItems = [];
   async function fetchNewsBatch(query) {
     try {
@@ -169,31 +190,32 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!res.ok) throw new Error(`News fetch failed (${res.status})`);
       return await res.json();
     } catch (err) {
-      console.error("News fetch error:", err);
+      console.error("Error fetching news:", err);
       return null;
     }
   }
   function renderNewsItem(article) {
     const list = document.getElementById("news-list");
-    if (!list) return;
     const li = document.createElement("li");
     li.innerHTML = `<a href="${article.link}" target="_blank">${article.title}</a>`;
     list.appendChild(li);
   }
   async function refreshNews() {
-    const queries = ["macroeconomy","sp500 stocks","economic reports"];
-    const results = await Promise.all(queries.map(q => fetchNewsBatch(q)));
-    results.forEach(data => {
-      if (data && data.status === "success" && Array.isArray(data.results)) {
-        data.results.forEach(article => {
-          if (!newsItems.some(it => it.link === article.link)) {
-            const item = { title: article.title, link: article.link };
-            newsItems.push(item);
-            renderNewsItem(item);
-          }
-        });
-      }
-    });
+    const data = await fetchNewsBatch("sp500 stocks");
+    if (data && data.status === "success" && Array.isArray(data.results)) {
+      data.results.forEach(article => {
+        if (!newsItems.some(it => it.link === article.link)) {
+          const item = { title: article.title, link: article.link };
+          newsItems.push(item);
+          renderNewsItem(item);
+        }
+      });
+    }
+  }
+  refreshNews();
+  setInterval(refreshNews, 600000); // fetch news every 10 minutes
+});
+
   }
   refreshNews();
   setInterval(refreshNews, 600000);
