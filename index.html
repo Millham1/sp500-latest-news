@@ -3,173 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>S&P latest news</title>
+  <title>S&P Latest News</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="hero">
-    <h1 class="hero-title">S&amp;P latest news</h1>
-
-    <!-- Live ticker -->
+    <h1 class="hero-title">S&amp;P Latest News</h1>
+    <img src="title-image.png" class="hero-image" alt="Market themed banner" />
     <div id="ticker-bar">
       <h4>Top Movers</h4>
       <div id="ticker-list"></div>
     </div>
-
-    <!-- Stock detail (overlay) -->
-    <section id="stock-detail" class="hidden">
-      <h2 id="detail-symbol"></h2>
-      <p id="detail-name"></p>
-      <table class="detail-table">
-        <tbody>
-          <tr><td>Percent Change</td><td id="detail-change"></td></tr>
-          <tr><td>Previous Close</td><td id="detail-prev"></td></tr>
-          <tr><td>Last Close</td><td id="detail-last"></td></tr>
-          <tr><td>Volume</td><td id="detail-vol"></td></tr>
-        </tbody>
-      </table>
-      <button id="close-detail">Close</button>
-    </section>
-
-    <!-- Header image (semi-transparent) -->
-    <img class="header-image" src="title-image.png" alt="Market themed hero image" />
   </header>
 
-  <main>
-    <!-- Stock headlines -->
-    <section id="stock-news">
-      <h2>S&amp;P 500 Stock Headlines</h2>
-      <ul id="stock-news-list">
-        <!-- Fallback items (unique links, Newsdata domain) -->
-        <li>
-          <a href="https://newsdata.io/" target="_blank">Alphabet earnings propel S&amp;P 500 tech giants to record highs</a>
-          <br><small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
-        </li>
-        <li>
-          <a href="https://newsdata.io/" target="_blank">Tesla slump drags S&amp;P 500 industrials after earnings miss</a>
-          <br><small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
-        </li>
-        <li>
-          <a href="https://newsdata.io/" target="_blank">Trade deals boost sentiment for S&amp;P 500 companies ahead of tariff deadline</a>
-          <br><small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
-        </li>
-      </ul>
-    </section>
+  <section id="stock-detail" class="hidden">
+    <h2 id="detail-symbol"></h2>
+    <p id="detail-name"></p>
+    <p id="detail-change"></p>
+    <p id="detail-close"></p>
+    <p id="detail-volume"></p>
+  </section>
 
-    <!-- Upcoming Government Reports -->
-    <section id="gov-reports">
-      <h2>Upcoming Government Reports</h2>
-      <table class="gov-table">
-        <thead>
-          <tr><th>Date &amp; Time (ET)</th><th>Report</th><th>Description</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Jul 26 2025 08:30</td><td>GDP (Q2) Advance</td><td>First estimate of GDP growth for Q2</td></tr>
-          <tr><td>Jul 31 2025 08:30</td><td>Nonfarm Payrolls</td><td>Monthly jobs report showing employment gains and unemployment rate</td></tr>
-          <tr><td>Aug 01 2025 10:00</td><td>ISM Manufacturing PMI</td><td>Index of U.S. manufacturing activity</td></tr>
-          <tr><td>Aug 02 2025 14:00</td><td>FOMC Rate Decision</td><td>Federal Reserve announcement on interest rates</td></tr>
-        </tbody>
-      </table>
-    </section>
+  <section id="stock-news">
+    <h2>S&amp;P 500 Stock Headlines</h2>
+    <ul id="stock-news-list"></ul>
+  </section>
 
-    <!-- Government Report Headlines (placed directly after gov-reports) -->
-    <section id="gov-news">
-      <h2>Government Report Headlines</h2>
-      <ul id="gov-news-list">
-        <li><a href="https://newsdata.io/" target="_blank">Markets await Q2 GDP release as economic momentum assessed</a></li>
-        <li><a href="https://newsdata.io/" target="_blank">Nonfarm Payrolls on deck: investors eye hiring and wages</a></li>
-        <li><a href="https://newsdata.io/" target="_blank">Fed rate decision approaches amid mixed inflation data</a></li>
-      </ul>
-    </section>
+  <section id="gov-upcoming">
+    <h2>Upcoming Government Reports</h2>
+    <ul id="gov-upcoming-list"></ul>
+  </section>
 
-    <!-- Market Snapshot & Highlights -->
-    <section id="snapshot">
-      <h2>Market Snapshot &amp; Highlights</h2>
-      <div class="snapshot-text">
-        <ul>
-          <li>
-            <a href="https://newsdata.io/" target="_blank">
-              S&amp;P 500 &amp; Nasdaq closed at record highs; Dow declined
-            </a><br>
-            <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
-          </li>
-          <li>
-            <a href="https://newsdata.io/" target="_blank">
-              80% of reporting companies beat earnings expectations
-            </a><br>
-            <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
-          </li>
-          <li>
-            <a href="https://newsdata.io/" target="_blank">
-              Trade optimism from deals with Japan, Indonesia &amp; Philippines; progress with EU ahead of Aug 1 tariff deadline
-            </a><br>
-            <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
-          </li>
-          <li>
-            <a href="https://newsdata.io/" target="_blank">
-              Risk appetite improved as yields climbed while global equities &amp; crude rallied and gold eased
-            </a><br>
-            <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
-          </li>
-        </ul>
-      </div>
-    </section>
+  <section id="gov-news">
+    <h2>Government Report Headlines</h2>
+    <ul id="gov-news-list"></ul>
+  </section>
 
-    <!-- Earnings & Sector Drivers -->
-    <section id="drivers">
-      <h2>Earnings &amp; Sector Drivers</h2>
-      <div class="card-container">
-        <div class="card">
-          <img src="ai_image.png" alt="S&amp;P 500 tech rally">
-          <h3>Alphabet &amp; AI Rally</h3>
-          <p>Alphabet’s earnings beat and its $85 B AI investment lifted fellow S&amp;P 500 tech giants like Nvidia and Microsoft, powering the index to record highs.</p>
-        </div>
-        <div class="card">
-          <img src="ev_image.png" alt="S&amp;P 500 industrial slump">
-          <h3>Tesla &amp; Industrial Slump</h3>
-          <p>Tesla—one of the largest S&amp;P 500 constituents—slid after an earnings miss and a “rough quarters” warning, while other S&amp;P 500 industrials like IBM and Honeywell also dropped.</p>
-        </div>
-        <div class="card">
-          <img src="trade_image.png" alt="Trade deals &amp; macro">
-          <h3>Trade Deals &amp; Macro</h3>
-          <p>New trade agreements and progress with the EU bolstered market sentiment for S&amp;P 500 companies as yields climbed and gold eased.</p>
-        </div>
-      </div>
-    </section>
+  <section id="snapshot">
+    <h2>Market Snapshot &amp; Highlights</h2>
+    <ul>
+      <li>
+        <a href="https://www.investopedia.com/sp500-record-close-07242025" target="_blank">
+          S&amp;P 500 and Nasdaq close at record highs
+        </a>
+        <br><small>Source: Investopedia, July 24, 2025, 5:28 PM EDT</small>
+      </li>
+      <li>
+        <a href="https://www.gnews.io/api/v4/top-headlines?q=earnings&apikey=YOUR_GNEWS_KEY" target="_blank">
+          80% of S&amp;P 500 companies beat earnings expectations
+        </a>
+        <br><small>Source: GNews, July 24, 2025, 3:11 PM EDT</small>
+      </li>
+    </ul>
+  </section>
 
-    <!-- Biggest Movers -->
-    <section id="movers">
-      <h2>Biggest Movers</h2>
-      <div class="movers-container">
-        <div class="advancers">
-          <h3>Advancers</h3>
-          <ul id="advancers-list"></ul>
-        </div>
-        <div class="decliners">
-          <h3>Decliners</h3>
-          <ul id="decliners-list"></ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Conclusion -->
-    <section id="conclusion">
-      <h2>Conclusion &amp; Outlook</h2>
-      <ul class="conclusion-list">
-        <li>Record highs mask mixed performance across sectors.</li>
-        <li>Earnings season is strong: the majority beat estimates, yet valuations remain stretched.</li>
-        <li>Trade negotiations and the Aug 1 tariff deadline will be pivotal for market direction.</li>
-        <li>Upcoming Fed meeting and macro data releases could spur volatility – stay vigilant.</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>Data and analysis sourced from Newsdata and GNews APIs. All quotes belong to their respective publishers.</p>
-  </footer>
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
