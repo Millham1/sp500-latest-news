@@ -211,7 +211,56 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
+// --- Earnings & Sector Drivers dynamic news from GNews ---
+const GNEWS_API_KEY = '2ca29948797355a9512aebd0be958da9';
+const GNEWS_URL = `https://gnews.io/api/v4/search?q=earnings+sector+sp500&lang=en&country=us&max=6&token=${GNEWS_API_KEY}`;
 
+function isRelevantDriversArticle(article) {
+  const text = `${article.title} ${article.description}`.toLowerCase();
+  return (
+    text.includes('earnings') ||
+    text.includes('sector') ||
+    text.includes('s&p 500') ||
+    text.includes('sp500') ||
+    text.includes('industrials') ||
+    text.includes('technology') ||
+    text.includes('financials') ||
+    text.includes('drivers')
+  );
+}
+
+async function fetchDriversNews() {
+  const container = document.getElementById('drivers-cards');
+  container.innerHTML = '<p>Loading latest news...</p>';
+  try {
+    const res = await fetch(GNEWS_URL);
+    const data = await res.json();
+    const relevantNews = (data.articles || []).filter(isRelevantDriversArticle);
+
+    if (!relevantNews.length) {
+      container.innerHTML = '<p>No relevant news found.</p>';
+      return;
+    }
+
+    container.innerHTML = '';
+    relevantNews.forEach(article => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${article.image || 'default_image.png'}" alt="${article.title}">
+        <h3><a href="${article.url}" target="_blank" rel="noopener noreferrer">${article.title}</a></h3>
+        <p>${article.description || ''}</p>
+        <small class="citation-text">Source: ${article.source.name} – ${new Date(article.publishedAt).toLocaleString()}</small>
+      `;
+      container.appendChild(card);
+    });
+  } catch (error) {
+    container.innerHTML = '<p>Could not load current news.</p>';
+    console.error(error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', fetchDriversNews);
   refreshStockNews();
   refreshGovNews();
   setInterval(refreshStockNews, 600000);
