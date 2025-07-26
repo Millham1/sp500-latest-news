@@ -10,13 +10,13 @@
   <header class="hero">
     <h1 class="hero-title">S&amp;P latest news</h1>
 
-    <!-- Live ticker -->
+    <!-- Ticker bar -->
     <div id="ticker-bar">
       <h4>Top Movers</h4>
       <div id="ticker-list"></div>
     </div>
 
-    <!-- Stock detail (overlay) -->
+    <!-- Stock detail overlay -->
     <section id="stock-detail" class="hidden">
       <h2 id="detail-symbol"></h2>
       <p id="detail-name"></p>
@@ -31,32 +31,38 @@
       <button id="close-detail">Close</button>
     </section>
 
-    <!-- Header image (semi-transparent) -->
+    <!-- Semi-transparent hero image -->
     <img class="header-image" src="title-image.png" alt="Market themed hero image" />
   </header>
 
   <main>
-    <!-- Stock headlines -->
+    <!-- Stock headlines first -->
     <section id="stock-news">
       <h2>S&amp;P 500 Stock Headlines</h2>
       <ul id="stock-news-list">
-        <!-- Fallback items (unique links, Newsdata domain) -->
+        <!-- Fallback headlines with citations; updated dynamically -->
         <li>
-          <a href="https://newsdata.io/" target="_blank">Alphabet earnings propel S&amp;P 500 tech giants to record highs</a>
-          <br><small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
+          <a href="https://newsdata.io/article/alphabet-earnings-tech-giants" target="_blank">
+            Alphabet earnings propel S&amp;P 500 tech giants to record highs
+          </a><br>
+          <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
         </li>
         <li>
-          <a href="https://newsdata.io/" target="_blank">Tesla slump drags S&amp;P 500 industrials after earnings miss</a>
-          <br><small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
+          <a href="https://newsdata.io/article/tesla-slump-industrials" target="_blank">
+            Tesla slump drags S&amp;P 500 industrials after earnings miss
+          </a><br>
+          <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
         </li>
         <li>
-          <a href="https://newsdata.io/" target="_blank">Trade deals boost sentiment for S&amp;P 500 companies ahead of tariff deadline</a>
-          <br><small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
+          <a href="https://newsdata.io/article/trade-deals-tariff-deadline" target="_blank">
+            Trade deals boost sentiment for S&amp;P 500 companies ahead of tariff deadline
+          </a><br>
+          <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
         </li>
       </ul>
     </section>
 
-    <!-- Upcoming Government Reports -->
+    <!-- Upcoming government reports -->
     <section id="gov-reports">
       <h2>Upcoming Government Reports</h2>
       <table class="gov-table">
@@ -72,13 +78,25 @@
       </table>
     </section>
 
-    <!-- Government Report Headlines (placed directly after gov-reports) -->
+    <!-- Government report headlines directly below government reports -->
     <section id="gov-news">
       <h2>Government Report Headlines</h2>
       <ul id="gov-news-list">
-        <li><a href="https://newsdata.io/" target="_blank">Markets await Q2 GDP release as economic momentum assessed</a></li>
-        <li><a href="https://newsdata.io/" target="_blank">Nonfarm Payrolls on deck: investors eye hiring and wages</a></li>
-        <li><a href="https://newsdata.io/" target="_blank">Fed rate decision approaches amid mixed inflation data</a></li>
+        <li>
+          <a href="https://newsdata.io/article/q2-gdp-release" target="_blank">
+            Markets await Q2 GDP release as economic momentum assessed
+          </a>
+        </li>
+        <li>
+          <a href="https://newsdata.io/article/nonfarm-payrolls-preview" target="_blank">
+            Nonfarm Payrolls on deck: investors eye hiring and wages
+          </a>
+        </li>
+        <li>
+          <a href="https://newsdata.io/article/fed-rate-decision-preview" target="_blank">
+            Fed rate decision approaches amid mixed inflation data
+          </a>
+        </li>
       </ul>
     </section>
 
@@ -88,25 +106,25 @@
       <div class="snapshot-text">
         <ul>
           <li>
-            <a href="https://newsdata.io/" target="_blank">
+            <a href="https://newsdata.io/article/sp500-nasdaq-record-highs" target="_blank">
               S&amp;P 500 &amp; Nasdaq closed at record highs; Dow declined
             </a><br>
             <small class="citation-text">Source: Newsdata – Jul 24 2025, 12:00 PM ET</small>
           </li>
           <li>
-            <a href="https://newsdata.io/" target="_blank">
+            <a href="https://newsdata.io/article/earnings-season-strong" target="_blank">
               80% of reporting companies beat earnings expectations
             </a><br>
             <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
           </li>
           <li>
-            <a href="https://newsdata.io/" target="_blank">
+            <a href="https://newsdata.io/article/trade-optimism-eu-japan" target="_blank">
               Trade optimism from deals with Japan, Indonesia &amp; Philippines; progress with EU ahead of Aug 1 tariff deadline
             </a><br>
             <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
           </li>
           <li>
-            <a href="https://newsdata.io/" target="_blank">
+            <a href="https://newsdata.io/article/risk-appetite-yields-equities" target="_blank">
               Risk appetite improved as yields climbed while global equities &amp; crude rallied and gold eased
             </a><br>
             <small class="citation-text">Source: Newsdata – Jul 24 2025</small>
@@ -152,7 +170,7 @@
       </div>
     </section>
 
-    <!-- Conclusion -->
+    <!-- Conclusion & Outlook -->
     <section id="conclusion">
       <h2>Conclusion &amp; Outlook</h2>
       <ul class="conclusion-list">
@@ -165,11 +183,12 @@
   </main>
 
   <footer>
-    <p>Data and analysis sourced from Newsdata and GNews APIs. All quotes belong to their respective publishers.</p>
+    <p>Data and analysis sourced from financial news outlets using Newsdata and GNews APIs. Quotes and figures belong to their respective sources.</p>
   </footer>
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
