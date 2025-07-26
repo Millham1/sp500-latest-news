@@ -93,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
   updateTicker();
   fetchStockData();
   setInterval(fetchStockData, 5000);
+  setInterval(updateTicker, 5000);
 
   // Show detail overlay on ticker click
   document.getElementById("ticker-list").addEventListener("click", (e) => {
